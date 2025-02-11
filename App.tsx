@@ -9,15 +9,11 @@ import {
   StyleSheet,
 } from 'react-native';
 
-const SignUpScreen = () => {
+const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSignUp = () => {
-    console.log('Sign up pressed');
+  const handleSendOTP = () => {
+    console.log('Send OTP pressed');
   };
 
   return (
@@ -31,85 +27,34 @@ const SignUpScreen = () => {
         <Image source={require('./assets/logo.png')} style={styles.logo} />
       </View>
 
-      {/* Main Title */}
+      {/* Title */}
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>
-          <Text style={styles.titleMain}>ELEVATING{'\n'}</Text>
-          <Text style={styles.titleSub}>FITNESS</Text>
-        </Text>
+        <Text style={styles.titleMain}>ELEVATING</Text>
+        <Text style={styles.titleSub}>FITNESS</Text>
       </View>
 
-      {/* Grey Container */}
+      {/* Forgot Password Container */}
       <View style={styles.greyContainer}>
-        <Text style={styles.signUpHeader}>Sign Up</Text>
+        <Text style={styles.headerText}>Forgot Password</Text>
 
-        {/* Input Fields */}
-        <View style={styles.inputsContainer}>
-
-          {/* Email Field with @ */}
-          <View style={styles.inputField}>
-            <Text style={styles.atSymbol}>@</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              placeholderTextColor="#999"
-              value={email}
-              onChangeText={setEmail}
-            />
-          </View>
-
-          {/* Password Field */}
-          <View style={styles.inputField}>
-            <Image source={require('./assets/Lock.png')} style={styles.icon} />
-            <TextInput
-              style={styles.passwordInput}
-              placeholder="Password"
-              placeholderTextColor="#999"
-              secureTextEntry={!showPassword}
-              value={password}
-              onChangeText={setPassword}
-            />
-            <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
-              <Image
-                source={showPassword ? require('./assets/Eye.png') : require('./assets/eyeClosedIcon.png')}
-                style={styles.icon}
-              />
-            </TouchableOpacity>
-          </View>
-
-          {/* Confirm Password Field */}
-          <View style={styles.inputField}>
-            <Image source={require('./assets/Lock.png')} style={styles.icon} />
-            <TextInput
-              style={styles.passwordInput}
-              placeholder="Confirm Password"
-              placeholderTextColor="#999"
-              secureTextEntry={!showConfirmPassword}
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-            />
-            <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)} style={styles.eyeIcon}>
-              <Image
-                source={showConfirmPassword ? require('./assets/Eye.png') : require('./assets/eyeClosedIcon.png')}
-                style={styles.icon}
-              />
-            </TouchableOpacity>
-          </View>
-
-          {/* Sign Up Button */}
-          <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
-            <Text style={styles.signUpButtonText}>Sign Up</Text>
-          </TouchableOpacity>
-
-          {/* Login Option */}
-          <View style={styles.loginContainer}>
-            <Text style={styles.loginText}>Already a user? </Text>
-            <TouchableOpacity onPress={() => console.log('Login pressed')}>
-              <Text style={styles.loginLink}>Log in</Text>
-            </TouchableOpacity>
-          </View>
-          
+        {/* Input Field with "@" Symbol */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.atSymbol}>@</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            placeholderTextColor="#999"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
         </View>
+
+        {/* Send OTP Button */}
+        <TouchableOpacity style={styles.sendOTPButton} onPress={handleSendOTP}>
+          <Text style={styles.sendOTPButtonText}>Send OTP</Text>
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
@@ -122,12 +67,12 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     position: 'absolute',
-    top: 40,
+    top: 50,
     left: 20,
   },
   logo: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     resizeMode: 'contain',
   },
   titleContainer: {
@@ -135,109 +80,67 @@ const styles = StyleSheet.create({
     top: '20%',
     left: 20,
   },
-  titleText: {
-    marginBottom: 20,
-  },
   titleMain: {
     fontSize: 36,
     fontWeight: 'bold',
     color: '#FFFFFF',
-    textShadowColor: 'rgba(128, 128, 128, 0.9)',
-    textShadowOffset: { width: 4, height: 4 },
-    textShadowRadius: 8,
   },
   titleSub: {
     fontSize: 36,
     fontWeight: 'bold',
     color: '#FFFFFF',
     opacity: 0.5,
-    textShadowColor: 'rgba(128, 128, 128, 0.9)',
-    textShadowOffset: { width: 4, height: 4 },
-    textShadowRadius: 8,
   },
   greyContainer: {
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    height: '55%',
+    height: '40%',
     backgroundColor: '#221E1E',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     padding: 25,
-    paddingBottom: 30,
+    alignItems: 'center',
   },
-  signUpHeader: {
-    fontSize: 24,
+  headerText: {
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#FFFFFF',
     marginBottom: 20,
-    textAlign: 'center',
   },
-  inputsContainer: {
-    gap: 20,
-  },
-  inputField: {
+  inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: 20,
+    borderRadius: 25,
     paddingHorizontal: 15,
-    shadowColor: '#666',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.5,
-    shadowRadius: 6,
-    elevation: 8,
+    width: '100%',
+    marginBottom: 20,
   },
   atSymbol: {
-    fontSize: 18,
-    color: '#666',
+    fontSize: 22,     // Adjusted size
+    color: '#000',    // Color of "@"
+    marginRight: 10,  // Spacing between "@" and text input
     fontWeight: 'bold',
-    marginRight: 10,
   },
   input: {
     flex: 1,
-    padding: 15,
     fontSize: 16,
-  },
-  passwordInput: {
-    flex: 1,
     paddingVertical: 15,
-    fontSize: 16,
+    color: '#000',
   },
-  icon: {
-    width: 20,
-    height: 20,
-    tintColor: '#666',
-    marginRight: 10,
-  },
-  eyeIcon: {
-    padding: 15,
-  },
-  signUpButton: {
+  sendOTPButton: {
     backgroundColor: '#FF6B00',
     borderRadius: 25,
     paddingVertical: 15,
+    width: '50%',
     alignItems: 'center',
-    marginTop: 10,
-    width: '100%',
   },
-  signUpButtonText: {
+  sendOTPButtonText: {
     color: '#FFFFFF',
     fontSize: 18,
-    fontWeight: 'bold',
-  },
-  loginContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 15,
-  },
-  loginText: {
-    color: '#FFFFFF',
-  },
-  loginLink: {
-    color: '#FF6B00',
     fontWeight: 'bold',
   },
 });
 
-export default SignUpScreen;
+export default ForgotPasswordScreen;
